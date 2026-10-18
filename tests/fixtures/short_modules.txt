@@ -1,0 +1,5 @@
+536870913	module-combine-sink	sink_name=audiomix_sala sink_properties=audiomix.managed=true slaves=alsa_output.pci-analog,bluez_output.AA_BB_CC.1
+536870914	module-combine-sink	sink_name=audiomix_legado sink_properties=device.description=Legado slaves=alsa_output.usb-Headset
+536870915	module-combine-sink	sink_name=fones_fio_bluetooth sink_properties=device.description=Fones slaves=alsa_output.pci-analog
+536870916	module-loopback	sink_name=audiomix_fake sink_properties=audiomix.managed=true
+536870917	module-combine-sink	sink_name=audiomix_evil sink_properties=notaudiomix.managed=true slaves=x,y

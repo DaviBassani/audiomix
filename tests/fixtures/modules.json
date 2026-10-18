@@ -1,0 +1,27 @@
+[
+  {
+    "name": "module-combine-sink",
+    "argument": "sink_name=audiomix_sala sink_properties=audiomix.managed=true slaves=alsa_output.pci-analog,bluez_output.AA_BB_CC.1",
+    "properties": {}
+  },
+  {
+    "name": "module-combine-sink",
+    "argument": "sink_name=audiomix_legado sink_properties=device.description=Legado slaves=alsa_output.usb-Headset",
+    "properties": {}
+  },
+  {
+    "name": "module-combine-sink",
+    "argument": "sink_name=fones_fio_bluetooth sink_properties=device.description=Fones slaves=alsa_output.pci-analog",
+    "properties": {}
+  },
+  {
+    "name": "module-loopback",
+    "argument": "sink_name=audiomix_fake sink_properties=audiomix.managed=true",
+    "properties": {}
+  },
+  {
+    "name": "module-combine-sink",
+    "argument": "sink_name=audiomix_evil sink_properties=notaudiomix.managed=true slaves=x,y",
+    "properties": {}
+  }
+]

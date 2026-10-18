@@ -1,0 +1,22 @@
+[
+  {
+    "index": 50,
+    "name": "bluez_card.AA_BB",
+    "active_profile": "a2dp-sink",
+    "properties": { "device.api": "bluez5" },
+    "profiles": {
+      "off": { "description": "Desligado", "available": true, "sinks": 0, "sources": 0, "priority": 0 },
+      "a2dp-sink": { "description": "Alta fidelidade (A2DP)", "available": true, "sinks": 1, "sources": 0, "priority": 100 },
+      "headset-head-unit": { "description": "Telefonia (HSP/HFP)", "available": true, "sinks": 1, "sources": 1, "priority": 50 }
+    }
+  },
+  {
+    "index": 51,
+    "name": "alsa_card.pci",
+    "active_profile": { "name": "HiFi", "description": "HiFi" },
+    "properties": { "device.api": "alsa" },
+    "profiles": {
+      "HiFi": { "description": "HiFi", "available": true, "sinks": 4, "sources": 2, "priority": 8000 }
+    }
+  }
+]

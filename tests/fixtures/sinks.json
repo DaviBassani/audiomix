@@ -1,0 +1,65 @@
+[
+  {
+    "index": 10,
+    "name": "alsa_output.pci-analog",
+    "state": "RUNNING",
+    "sample_specification": "s16le 2ch 48000Hz",
+    "channel_map": "front-left,front-right",
+    "active_port": "[Out] Headphones",
+    "owner_module": null,
+    "properties": { "device.api": "alsa", "device.description": "Fones com fio" },
+    "ports": [
+      { "name": "[Out] Headphones", "description": "Headphones", "type": "Headphones", "availability": "available" },
+      { "name": "[Out] Speaker", "description": "Speaker", "type": "Speaker", "availability": "availability unknown" }
+    ]
+  },
+  {
+    "index": 11,
+    "name": "alsa_output.pci-hdmi",
+    "state": "SUSPENDED",
+    "sample_specification": "s24le 2ch 48000Hz",
+    "channel_map": "front-left,front-right",
+    "active_port": "[Out] HDMI1",
+    "properties": { "device.api": "alsa", "device.description": "Saída HDMI" },
+    "ports": [
+      { "name": "[Out] HDMI1", "description": "HDMI / DisplayPort", "type": "HDMI", "availability": "not available" }
+    ]
+  },
+  {
+    "index": 12,
+    "name": "bluez_output.AA_BB_CC.1",
+    "state": "RUNNING",
+    "sample_specification": "s16le 2ch 44100Hz",
+    "channel_map": "front-left,front-right",
+    "active_port": "headset-output",
+    "properties": { "device.api": "bluez5", "node.description": "Fone BT" },
+    "ports": [
+      { "name": "headset-output", "description": "Headset", "type": "Headset", "availability": "available" }
+    ]
+  },
+  {
+    "index": 13,
+    "name": "alsa_output.usb-Headset",
+    "state": "IDLE",
+    "sample_specification": "s16le 2ch 44100Hz",
+    "active_port": null,
+    "properties": { "device.bus": "usb", "device.description": "Headset USB" },
+    "ports": []
+  },
+  {
+    "index": 14,
+    "name": "audiomix_sala",
+    "state": "IDLE",
+    "active_port": null,
+    "properties": { "audiomix.managed": "true", "node.virtual": "true", "device.description": "Grupo Sala" },
+    "ports": []
+  },
+  {
+    "index": 15,
+    "name": "fones_fio_bluetooth",
+    "state": "RUNNING",
+    "active_port": null,
+    "properties": { "node.virtual": "true", "device.description": "Fones Fio" },
+    "ports": []
+  }
+]

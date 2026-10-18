@@ -1,0 +1,11 @@
+[Desktop Entry]
+Type=Application
+Name=AudioMix
+GenericName=Audio Routing
+Comment=Combine fones Bluetooth, USB e com fio
+Exec=audiomix
+Icon=audio-headphones
+Terminal=true
+StartupNotify=false
+Categories=AudioVideo;Audio;
+Keywords=audio;sound;headphones;Bluetooth;fones;

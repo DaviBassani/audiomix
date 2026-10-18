@@ -1,0 +1,20 @@
+[
+  {
+    "index": 100,
+    "client": "235",
+    "sink": 14,
+    "properties": { "application.name": "Firefox", "media.class": "Stream/Playback/Audio" }
+  },
+  {
+    "index": 101,
+    "client": null,
+    "sink": 14,
+    "properties": { "pulse.module.id": "536870913", "media.class": "Stream/Output/Audio" }
+  },
+  {
+    "index": 102,
+    "client": "236",
+    "sink": 10,
+    "properties": { "application.name": "MPV" }
+  }
+]

@@ -1,0 +1,32 @@
+[package]
+name = "audiomix"
+version = "0.2.0"
+edition = "2021"
+description = "CLI em português para combinar saídas de áudio no Linux via pactl"
+authors = ["Davi Lopes Bassani"]
+repository = "https://github.com/DaviBassani/audiomix"
+readme = "README.md"
+keywords = ["audio", "pipewire", "pulseaudio", "tui", "linux"]
+categories = ["command-line-utilities", "multimedia::audio"]
+
+[lib]
+name = "audiomix"
+path = "src/lib.rs"
+
+[[bin]]
+name = "audiomix"
+path = "src/main.rs"
+
+[dependencies]
+anyhow = "1"
+clap = { version = "4", features = ["derive"] }
+ratatui = { version = "0.30.2", features = ["unstable-rendered-line-info"] }
+crossterm = "0.29"
+wait-timeout = "0.2"
+nix = { version = "0.30", features = ["signal", "process"] }
+unicode-width = "0.2"
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+
+[profile.release]
+strip = true
