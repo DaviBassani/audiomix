@@ -1,3 +1,5 @@
+#![cfg(target_os = "linux")]
+
 //! Testes de integração com backend `pactl` simulado (injeção) e um teste de
 //! subprocesso com um `pactl` falso no PATH.
 

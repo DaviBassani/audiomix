@@ -1,3 +1,5 @@
+#![cfg(target_os = "linux")]
+
 use audiomix::combine::OwnedGroup;
 use audiomix::devices::Kind;
 use audiomix::tui::{

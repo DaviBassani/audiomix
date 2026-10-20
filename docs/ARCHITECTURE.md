@@ -1,8 +1,8 @@
 # Arquitetura e Segurança
 
-> A implementação atual é exclusiva para Linux. A interface organiza operações de PulseAudio/PipeWire; ela não processa amostras de áudio diretamente.
+> O backend Linux organiza operações de PulseAudio/PipeWire. A prévia Windows usa um backend separado de captura e reprodução WASAPI nativo; veja o [guia Windows](WINDOWS.md) e seus limites de validação.
 
-## Fluxo
+## Fluxo Linux
 
 ```text
 TUI / subcomandos
@@ -26,6 +26,18 @@ servidor de audio da sessao do usuario
 | `commands` | Validação anterior à escrita, composição, fallback, migração e mensagens de resultado |
 | `backend` | Execução limitada de `pactl`, captura de saída e tratamento de erros |
 | `tui` | Estado, navegação, formulários, trabalhos em background e renderização |
+| `windows_audio` | Enumeração CoreAudio, validação de origem/destinos e motor WASAPI com filas limitadas |
+| `windows_app` | TUI e comandos específicos das capacidades Windows, com interface de testes simulados |
+
+Os módulos Linux são condicionados por plataforma. Não são compilados nem emulados como se fossem um servidor PulseAudio no Windows. A lógica pura de seleção, buffers e estado Windows também é testada no Linux; os testes nativos WASAPI exigem Windows.
+
+## Fluxo Windows
+
+O backend Windows captura somente a saída padrão atual e renderiza cópias somente nas saídas secundárias selecionadas. Ele não redefine o padrão nem controla perfis A2DP. A seleção rejeita a própria origem como destino e é revalidada com a lista nativa antes de iniciar.
+
+Todas as interfaces COM de áudio ficam na thread que as inicializou. A sessão encerra os clientes ao parar ou sair; mudanças de origem ou perda de dispositivos interrompem a cópia. As filas são limitadas, os contadores de underrun/overflow são expostos e a conversão de formato compartilhado fica com o motor de áudio do Windows.
+
+A aquisição de pacotes de captura verifica limites e o indicador de silêncio antes de acessar dados. Pacotes silenciosos podem não fornecer um ponteiro legível. Buffers de reprodução não recebem flags exclusivas da captura. Estas políticas possuem testes puros; a reprodução efetiva ainda precisa de validação em hardware Windows.
 
 ## Estado e Concorrência
 
@@ -72,6 +84,6 @@ Testes com mocks não demonstram qualidade acústica, latência, suporte de code
 
 ## Evolução
 
-O maior módulo é a TUI. A separação interna entre estado, execução e desenho permite extrair submódulos sem alterar o contrato de comandos quando isso trouxer benefício concreto. Não há um framework genérico de plugins nem uma camada de compatibilidade Windows nesta versão.
+Os módulos de TUI são grandes. A separação interna entre estado, execução e desenho permite extrair submódulos sem alterar os contratos quando isso trouxer benefício concreto. Não há um framework genérico de plugins ou uma simulação de `pactl` no Windows.
 
-Uma futura implementação Windows precisará de um backend próprio e de testes da plataforma; trocar apenas a extensão do executável ou procurar `pactl` no Windows não fornece essa funcionalidade.
+A validação acústica Windows, medições de drift e testes com controladores reais permanecem necessários antes de considerar essa prévia equivalente à versão Linux publicada.

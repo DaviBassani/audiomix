@@ -1,10 +1,17 @@
+#[cfg(target_os = "linux")]
 use std::io::IsTerminal;
 
-use anyhow::{Context, Result};
+#[cfg(target_os = "linux")]
+use anyhow::Context;
+use anyhow::Result;
+#[cfg(target_os = "linux")]
 use clap::Parser;
 
+#[cfg(target_os = "linux")]
 use audiomix::backend::PactlBackend;
+#[cfg(target_os = "linux")]
 use audiomix::cli::Cli;
+#[cfg(target_os = "linux")]
 use audiomix::{commands, tui};
 
 fn main() {
@@ -18,6 +25,7 @@ fn main() {
     std::process::exit(code);
 }
 
+#[cfg(target_os = "linux")]
 fn run() -> Result<()> {
     let cli = Cli::parse();
     let backend = PactlBackend::new();
@@ -33,4 +41,14 @@ fn run() -> Result<()> {
             tui::run().context("modo interativo")
         }
     }
+}
+
+#[cfg(target_os = "windows")]
+fn run() -> Result<()> {
+    audiomix::windows_app::run()
+}
+
+#[cfg(not(any(target_os = "linux", target_os = "windows")))]
+fn run() -> Result<()> {
+    anyhow::bail!("AudioMix suporta Linux e Windows; esta plataforma nao e suportada")
 }

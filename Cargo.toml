@@ -1,8 +1,8 @@
 [package]
 name = "audiomix"
-version = "0.2.0"
+version = "0.3.0-alpha.1"
 edition = "2021"
-description = "CLI em português para combinar saídas de áudio no Linux via pactl"
+description = "Aplicativo de terminal para roteamento de audio no Linux e espelhamento WASAPI no Windows"
 authors = ["Davi Lopes Bassani"]
 license = "MIT"
 repository = "https://github.com/DaviBassani/audiomix"
@@ -23,11 +23,17 @@ anyhow = "1"
 clap = { version = "4", features = ["derive"] }
 ratatui = { version = "0.30.2", features = ["unstable-rendered-line-info"] }
 crossterm = "0.29"
-wait-timeout = "0.2"
-nix = { version = "0.30", features = ["signal", "process"] }
 unicode-width = "0.2"
 serde = { version = "1", features = ["derive"] }
 serde_json = "1"
+
+[target.'cfg(target_os = "linux")'.dependencies]
+wait-timeout = "0.2"
+nix = { version = "0.30", features = ["signal", "process"] }
+
+[target.'cfg(windows)'.dependencies]
+wasapi = "0.26.0"
+windows = { version = "0.62.2", features = ["Win32_Media_Audio"] }
 
 [profile.release]
 strip = true

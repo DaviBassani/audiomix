@@ -2,8 +2,8 @@
   <h1>AudioMix</h1>
   <p>O mesmo som em mais de um fone. Um painel de controle dentro do terminal.</p>
   <p>
-    <img alt="Plataforma: somente Linux" src="https://img.shields.io/badge/plataforma-Linux-2496ED">
-    <img alt="Versao 0.2.0" src="https://img.shields.io/badge/versao-0.2.0-38b2ac">
+    <img alt="Plataformas: Linux e previa Windows" src="https://img.shields.io/badge/plataforma-Linux%20%2B%20Windows%20alpha-2496ED">
+    <img alt="Versao 0.3.0-alpha.1" src="https://img.shields.io/badge/versao-0.3.0--alpha.1-38b2ac">
     <img alt="Interface TUI e CLI" src="https://img.shields.io/badge/interface-TUI%20%2B%20CLI-eab308">
   </p>
 </div>
@@ -11,7 +11,13 @@
 **AudioMix** combina duas ou mais saídas físicas de áudio em uma saída virtual. Use, por exemplo, um fone Bluetooth e outro com fio para duas pessoas ouvirem o mesmo conteúdo no computador.
 
 > [!IMPORTANT]
-> **Esta versão funciona somente no Linux**, com PipeWire compatível com PulseAudio ou PulseAudio e o comando `pactl`. Ainda não há versão Windows ou macOS disponível neste projeto.
+> Esta branch contém a prévia **Windows 0.3.0-alpha.1**, com CoreAudio/WASAPI nativo e capacidades diferentes do Linux. A reprodução ainda precisa ser validada em hardware Windows real. A versão Linux publicada em `main` permanece separada. Não há release Windows pública ou suporte macOS.
+
+## Windows Experimental
+
+Consulte o [guia Windows](docs/WINDOWS.md) e o [relatório de validação](docs/WINDOWS-VALIDATION.md). O aplicativo captura a saída padrão atual e reproduz cópias apenas nas saídas adicionais selecionadas, sem alterar o padrão nem perfis Bluetooth. A sessão termina ao fechar o programa.
+
+No Windows, use `audiomix.exe list` para listar dispositivos ou abra `audiomix.exe` para usar o painel. Os comandos e instruções de instalação via `pactl` apresentados abaixo são exclusivos do **Linux**.
 
 **Navegação:** [Instalar](#instalação) · [Usar o painel](#primeira-combinação) · [Atalhos](#atalhos) · [Comandos](#linha-de-comando) · [Problemas comuns](#problemas-comuns) · [Desenvolvimento](#desenvolvimento)
 
@@ -151,7 +157,7 @@ Os subcomandos não exigem confirmação interativa; as opções da linha de com
 
 ## Limites da Versão
 
-- **Somente Linux.** Nenhum executável Windows é oferecido por esta versão.
+- As instruções e grupos PulseAudio/PipeWire desta seção são exclusivos do **Linux**. A prévia Windows tem backend, comandos e limitações próprios, descritos no guia Windows.
 - Os grupos vivem no servidor de áudio e **não são restaurados automaticamente após reiniciar**.
 - Desconectar dispositivos ou trocar perfis pode exigir recriar o grupo.
 - Bluetooth e saídas com fio podem ter atrasos diferentes. Sincronização perfeita não é garantida.

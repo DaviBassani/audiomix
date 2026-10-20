@@ -1,3 +1,5 @@
+#![cfg(target_os = "linux")]
+
 use audiomix::combine::OwnedGroup;
 use audiomix::model::Sink;
 use audiomix::tui::{self, App, Modal, ServerInfo, Snapshot, Tab};

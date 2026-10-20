@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="en">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AudioMix - Third-Party License Notices</title>
+<style>
+body { max-width: 70rem; margin: 3rem auto; padding: 0 1.5rem; font: 1rem/1.6 system-ui, sans-serif; }
+pre { white-space: pre-wrap; overflow-wrap: anywhere; padding: 1.5rem; background: #f3f4f6; }
+h2 { margin-top: 3rem; border-top: 1px solid #cbd5e1; padding-top: 1rem; }
+</style>
+<h1>AudioMix: Third-Party License Notices</h1>
+<p>License notices for dependencies included in the Windows build. The AudioMix license is provided separately.</p>
+{{#each licenses}}
+<h2>{{name}}</h2>
+<ul>
+{{#each used_by}}
+<li>{{crate.name}} {{crate.version}}</li>
+{{/each}}
+</ul>
+<pre>{{text}}</pre>
+{{/each}}
+</html>

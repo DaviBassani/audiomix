@@ -1,3 +1,5 @@
+#![cfg(target_os = "linux")]
+
 use audiomix::combine::parse_owner;
 use audiomix::model::{Module, Sink};
 use audiomix::tui::{App, JobDone, JobOutcome, JobSpec, Modal, ServerInfo, Snapshot, Tab};
