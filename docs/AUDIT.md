@@ -60,6 +60,6 @@ O workflow Linux foi preparado para executar formatação, lint, testes e build.
 - O override `AUDIOMIX_PACTL` aceita um executável de confiança. Não há sandbox para wrappers arbitrários ou processos que deliberadamente se desassociem do grupo.
 - O servidor pode receber uma alteração antes de um timeout ou erro de comunicação. A interface informa falhas e permite reler o estado; não há transação distribuída com rollback garantido.
 - A versão continua exclusiva para Linux e não restaura grupos automaticamente após reiniciar.
-- A licença de distribuição ainda não foi escolhida pelo mantenedor; não foi atribuída uma licença em seu nome sem essa decisão.
+- Na revisão de 18 de outubro, a licença de distribuição ainda estava pendente. Após a autorização para publicação open source em 20 de outubro de 2026, o projeto passou a adotar a [licença MIT](../LICENSE), com autoria do mantenedor.
 
 Para entender os controles e seus limites, consulte [Arquitetura e segurança](ARCHITECTURE.md).

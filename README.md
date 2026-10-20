@@ -187,4 +187,4 @@ A preparação da versão Linux inclui um [relatório de revisão de publicaçã
 
 **Autoria:** [Davi Lopes Bassani](https://github.com/DaviBassani).
 
-**Licença:** ainda não definida pelo mantenedor. A disponibilidade pública do código não concede automaticamente uma licença de redistribuição ou uso.
+**Licença:** [MIT](LICENSE). Você pode usar, modificar e redistribuir o projeto, mantendo os avisos de autoria e os termos da licença.

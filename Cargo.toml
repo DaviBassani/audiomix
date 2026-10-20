@@ -4,6 +4,7 @@ version = "0.2.0"
 edition = "2021"
 description = "CLI em português para combinar saídas de áudio no Linux via pactl"
 authors = ["Davi Lopes Bassani"]
+license = "MIT"
 repository = "https://github.com/DaviBassani/audiomix"
 readme = "README.md"
 keywords = ["audio", "pipewire", "pulseaudio", "tui", "linux"]
