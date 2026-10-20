@@ -79,7 +79,9 @@ O pacote deve acompanhar o executavel, esta documentacao, a licenca MIT do proje
 
 ## Estado de Validacao
 
-A compilacao cruzada e testes simulados nao comprovam reproducao acustica em Windows. Consulte o relatorio que acompanha o pacote para saber quais verificacoes foram executadas. Nao ha release Windows publica apenas por existir esta branch local.
+A compilacao cruzada e testes simulados nao comprovam reproducao acustica em Windows. Consulte o relatorio que acompanha o pacote para saber quais verificacoes foram executadas. Os downloads sao disponibilizados como [pre-release experimental no GitHub](https://github.com/DaviBassani/audiomix/releases/tag/v0.3.0-alpha.1), nao como uma versao de producao validada em hardware.
+
+Chamadas de inicializacao e encerramento dependem das APIs e dos drivers do Windows. O prazo de espera da inicializacao nao garante que uma chamada COM bloqueada sera cancelada; um driver bloqueado pode atrasar a parada ou o encerramento.
 
 ## Compilar e Empacotar
 
@@ -90,8 +92,10 @@ O pacote local desta previa foi produzido no Linux com Rust para Windows e uma t
 ```bash
 rustup target add x86_64-pc-windows-gnullvm
 cargo install cargo-about --locked --features cli
-export LLVM_MINGW_ROOT="/caminho/para/llvm-mingw"
+export LLVM_MINGW_ARCHIVE="/caminho/para/llvm-mingw-20261006-ucrt-ubuntu-22.04-x86_64.tar.xz"
 ./scripts/package-windows.sh
 ```
 
-Use uma distribuicao LLVM-MinGW de origem confiavel e confira seu checksum. O script nao instala ferramentas de sistema nem altera a configuracao do shell. Ele usa um diretorio temporario novo, gera as licencas das dependencias para o alvo Windows, inclui avisos do runtime Rust e da toolchain e produz o executavel, ZIP e checksums em `dist/`. Nao sobrescreve um ZIP anterior com o mesmo nome.
+O script exige a distribuicao LLVM-MinGW 20261006 acima e verifica seu SHA-256 fixado antes de extrai-la em um diretorio temporario novo. O arquivo oficial esta na [pagina do fornecedor](https://github.com/mstorsjo/llvm-mingw/releases/tag/20261006). Isso verifica o arquivo da toolchain, mas nao transforma um ambiente de compilacao comprometido em confiavel; Cargo, Rust e o gerador de licencas tambem devem vir de origens confiaveis.
+
+O script nao instala ferramentas de sistema nem altera a configuracao do shell. Ele gera as licencas das dependencias para o alvo Windows, inclui avisos do runtime Rust e da toolchain e produz o executavel, ZIP e checksums em `dist/`. Nao sobrescreve um ZIP anterior com o mesmo nome.

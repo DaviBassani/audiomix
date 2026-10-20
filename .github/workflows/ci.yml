@@ -1,4 +1,4 @@
-name: Linux Checks
+name: Linux and Windows Checks
 
 on:
   push:
@@ -47,3 +47,7 @@ jobs:
         run: cargo +stable test --locked --all-targets
       - name: Release Build
         run: cargo +stable build --locked --release
+      - name: Native Windows CLI Read-Only Smoke Test
+        run: |
+          ./target/release/audiomix.exe --version
+          ./target/release/audiomix.exe --help

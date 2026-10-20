@@ -11,13 +11,13 @@ rustc_bin=${RUSTC:-$(command -v rustc || true)}
 export PATH="$(dirname -- "$cargo_bin"):$PATH"
 about_bin=${CARGO_ABOUT:-cargo-about}
 target=x86_64-pc-windows-gnullvm
-: "${LLVM_MINGW_ROOT:?Set LLVM_MINGW_ROOT to a trusted, extracted LLVM-MinGW toolchain}"
-
-linker="$LLVM_MINGW_ROOT/bin/x86_64-w64-mingw32-clang"
-[[ -x "$linker" ]] || { printf '%s\n' 'LLVM-MinGW linker not found.' >&2; exit 1; }
-for tool in "$cargo_bin" "$rustc_bin" "$about_bin" zip jq sha256sum; do
+: "${LLVM_MINGW_ARCHIVE:?Set LLVM_MINGW_ARCHIVE to the pinned LLVM-MinGW archive}"
+for tool in "$cargo_bin" "$rustc_bin" "$about_bin" zip jq sha256sum tar; do
     command -v "$tool" >/dev/null || { printf 'Missing build tool: %s\n' "$tool" >&2; exit 1; }
 done
+expected_sha256=5f9c6ed95b2d4bdb2869a488c5fd5857fbdabcf288a0aa3eb1da43f6a08d8ab4
+actual_sha256=$(sha256sum < "$LLVM_MINGW_ARCHIVE")
+[[ "${actual_sha256%% *}" == "$expected_sha256" ]] || { printf '%s\n' 'LLVM-MinGW archive checksum mismatch.' >&2; exit 1; }
 
 version=$("$cargo_bin" metadata --no-deps --format-version 1 --locked | jq -r '.packages[] | select(.name == "audiomix") | .version')
 name="audiomix-$version-windows-x86_64"
@@ -25,6 +25,10 @@ dist="$project_dir/dist"
 mkdir -p "$dist"
 stage=$(mktemp -d "$dist/.windows-package.XXXXXX")
 trap 'rm -rf -- "$stage"' EXIT
+tar -xf "$LLVM_MINGW_ARCHIVE" -C "$stage"
+llvm_root="$stage/llvm-mingw-20261006-ucrt-ubuntu-22.04-x86_64"
+linker="$llvm_root/bin/x86_64-w64-mingw32-clang"
+[[ -x "$linker" ]] || { printf '%s\n' 'Pinned LLVM-MinGW linker not found.' >&2; exit 1; }
 payload="$stage/$name"
 mkdir -p "$payload/licenses/rust" "$payload/licenses/toolchain"
 
@@ -53,8 +57,8 @@ cp docs/WINDOWS-VALIDATION.md "$payload/VALIDATION.md"
 sysroot=$("$rustc_bin" --print sysroot)
 cp "$sysroot/share/doc/rust/COPYRIGHT-library.html" "$payload/licenses/rust/"
 cp -RL "$sysroot/share/doc/rust/licenses" "$payload/licenses/rust/"
-cp "$LLVM_MINGW_ROOT/LICENSE.TXT" "$payload/licenses/toolchain/LLVM-LICENSE.txt"
-cp -RL "$LLVM_MINGW_ROOT/x86_64-w64-mingw32/share/mingw32" "$payload/licenses/toolchain/"
+cp "$llvm_root/LICENSE.TXT" "$payload/licenses/toolchain/LLVM-LICENSE.txt"
+cp -RL "$llvm_root/x86_64-w64-mingw32/share/mingw32" "$payload/licenses/toolchain/"
 
 # Fresh staging prevents stale files or local configuration entering the ZIP.
 zip_path="$dist/$name.zip"
@@ -62,4 +66,6 @@ zip_path="$dist/$name.zip"
 (cd "$stage" && zip -qr "$zip_path" "$name")
 cp "$payload/audiomix.exe" "$dist/$name.exe"
 (cd "$dist" && sha256sum "$name.exe" "$name.zip" > SHA256SUMS)
+mkdir -p "$dist/release"
+(cd "$dist" && sha256sum "$name.zip" > release/SHA256SUMS)
 printf 'Package: %s\nExecutable: %s\nChecksums: %s\n' "$zip_path" "$dist/$name.exe" "$dist/SHA256SUMS"

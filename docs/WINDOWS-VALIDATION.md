@@ -12,7 +12,7 @@ Este relatorio distingue a compilacao, os testes simulados e as verificacoes que
 | Formatacao Rust | Aprovada |
 | Clippy Linux, todos os alvos locais, avisos como erro | Aprovado |
 | Clippy para Windows, incluindo testes, avisos como erro | Aprovado |
-| Compilacao e link de todos os executaveis de teste Windows | Aprovados com `--no-run`; os testes Windows nao foram executados |
+| Compilacao e link de todos os executaveis de teste Windows | Aprovados com `--no-run` na validacao local; a execucao remota e registrada separadamente no GitHub Actions |
 | Compilacao otimizada do aplicativo Windows | Aprovada para `x86_64-pc-windows-gnullvm` |
 | Inspecao do executavel | PE32+ x86-64, subsistema console |
 | Dependencias DLL | Apenas contratos e bibliotecas do proprio Windows/UCRT na tabela de importacao |
@@ -56,4 +56,10 @@ Nenhuma dessas verificacoes acusticas ou de driver e apresentada como realizada 
 
 O pacote e uma previa portatil local, nao assinada com Authenticode, com executavel, guia, este relatorio, licenca MIT e avisos de terceiros. Os checksums ficam no arquivo `SHA256SUMS` ao lado do pacote.
 
-A branch `windows-support` e local. A `main` Linux publicada permanece separada; nao foi criada uma release Windows publica. Um workflow de verificacoes Windows foi preparado na branch, mas ainda nao foi executado no GitHub.
+A implementacao fica na branch `windows-support`, separada da `main` Linux. A distribuicao publica e identificada como **pre-release experimental**, nao como uma versao validada em hardware Windows. Consulte as [notas da pre-release](https://github.com/DaviBassani/audiomix/releases/tag/v0.3.0-alpha.1) e os resultados mais recentes de [GitHub Actions](https://github.com/DaviBassani/audiomix/actions) para o estado da publicacao e dos checks remotos; eles nao substituem os testes acusticos pendentes.
+
+## Revisao Antes da Publicacao
+
+Uma revisao independente de seguranca nao encontrou achados bloqueantes para essa distribuicao experimental. Foram repetidas as buscas de segredos no historico e nos arquivos, a verificacao RustSec e a conferencia dos hashes do executavel e do ZIP. Os textos de disponibilidade foram atualizados para evitar confundir uma pre-release publica com uma versao de producao.
+
+A compilacao utiliza Rust 1.99.1, Cargo About 0.9.2 e LLVM-MinGW 20261006 (Clang 23.0.0). O empacotador agora verifica o arquivo oficial LLVM-MinGW antes de extrair e usar uma copia nova; o SHA-256 fixado e `5f9c6ed95b2d4bdb2869a488c5fd5857fbdabcf288a0aa3eb1da43f6a08d8ab4`. Essa verificacao nao cobre um ambiente inteiro comprometido. O prazo de inicializacao tambem nao oferece cancelamento forcado de uma chamada COM ou driver bloqueado; essa limitacao de disponibilidade permanece documentada.

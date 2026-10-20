@@ -11,7 +11,15 @@
 **AudioMix** combina duas ou mais saídas físicas de áudio em uma saída virtual. Use, por exemplo, um fone Bluetooth e outro com fio para duas pessoas ouvirem o mesmo conteúdo no computador.
 
 > [!IMPORTANT]
-> Esta branch contém a prévia **Windows 0.3.0-alpha.1**, com CoreAudio/WASAPI nativo e capacidades diferentes do Linux. A reprodução ainda precisa ser validada em hardware Windows real. A versão Linux publicada em `main` permanece separada. Não há release Windows pública ou suporte macOS.
+> Esta branch contém a prévia **Windows 0.3.0-alpha.1**, com CoreAudio/WASAPI nativo e capacidades diferentes do Linux. A reprodução ainda precisa ser validada em hardware Windows real. A versão Linux publicada em `main` permanece separada. Não há suporte macOS.
+
+## Baixar Para Windows
+
+**[Baixar AudioMix Windows x64 - ZIP completo](https://github.com/DaviBassani/audiomix/releases/download/v0.3.0-alpha.1/audiomix-0.3.0-alpha.1-windows-x86_64.zip)**
+
+[Notas e instruções](https://github.com/DaviBassani/audiomix/releases/tag/v0.3.0-alpha.1) · [Checksums SHA-256](https://github.com/DaviBassani/audiomix/releases/download/v0.3.0-alpha.1/SHA256SUMS)
+
+Extraia o pacote inteiro e abra `audiomix.exe`. Não é necessário instalar Rust. O pacote inclui guia, relatório de validação e avisos de licença.
 
 ## Windows Experimental
 
