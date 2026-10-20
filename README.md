@@ -11,7 +11,16 @@
 **AudioMix** combina duas ou mais saídas físicas de áudio em uma saída virtual. Use, por exemplo, um fone Bluetooth e outro com fio para duas pessoas ouvirem o mesmo conteúdo no computador.
 
 > [!IMPORTANT]
-> **Esta versão funciona somente no Linux**, com PipeWire compatível com PulseAudio ou PulseAudio e o comando `pactl`. Ainda não há versão Windows ou macOS disponível neste projeto.
+> O código desta branch `main` é a versão **Linux**, com PipeWire compatível com PulseAudio ou PulseAudio e `pactl`. A prévia Windows usa um backend separado na branch `windows-support`; não há suporte macOS.
+
+## Baixar Para Windows
+
+**[Baixar AudioMix Windows x64 - ZIP completo](https://github.com/DaviBassani/audiomix/releases/download/v0.3.0-alpha.1/audiomix-0.3.0-alpha.1-windows-x86_64.zip)**
+
+[Notas da pré-release e instruções](https://github.com/DaviBassani/audiomix/releases/tag/v0.3.0-alpha.1) · [Checksums SHA-256](https://github.com/DaviBassani/audiomix/releases/download/v0.3.0-alpha.1/SHA256SUMS) · [Código Windows](https://github.com/DaviBassani/audiomix/tree/windows-support)
+
+> [!WARNING]
+> **Prévia experimental para Windows 10/11 x64.** Extraia o ZIP e abra `audiomix.exe`; não é necessário instalar Rust. O executável não é assinado com Authenticode e a reprodução em hardware Windows real ainda precisa ser validada. Compilação e testes simulados não garantem compatibilidade com todos os dispositivos.
 
 **Navegação:** [Instalar](#instalação) · [Usar o painel](#primeira-combinação) · [Atalhos](#atalhos) · [Comandos](#linha-de-comando) · [Problemas comuns](#problemas-comuns) · [Desenvolvimento](#desenvolvimento)
 
@@ -151,7 +160,7 @@ Os subcomandos não exigem confirmação interativa; as opções da linha de com
 
 ## Limites da Versão
 
-- **Somente Linux.** Nenhum executável Windows é oferecido por esta versão.
+- Os grupos e comandos PulseAudio/PipeWire descritos nesta seção são exclusivos do **Linux**. A prévia Windows tem implementação e limitações próprias, apresentadas nas notas da pré-release.
 - Os grupos vivem no servidor de áudio e **não são restaurados automaticamente após reiniciar**.
 - Desconectar dispositivos ou trocar perfis pode exigir recriar o grupo.
 - Bluetooth e saídas com fio podem ter atrasos diferentes. Sincronização perfeita não é garantida.
